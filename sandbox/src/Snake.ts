@@ -1,31 +1,64 @@
 import display from "./display";
-
-// place your code on line 5 above the export statement below
-
+import Point from "./Point";
 class Snake {
-  private currentPosition: number;
+  private currentPosition: Point;
   private currentDirection: number;
+
   constructor() {
-    this.currentPosition = 0;
+    this.currentPosition = new Point(0, 0);
     this.currentDirection = 1;
   }
-  move(squares: number) {
+  /**
+   * @deprecated Use {turn}
+   */
+  public turn() {
+    this.currentDirection *= -1;
+  }
+  public turnLeft() {
     if (this.currentDirection === 1) {
-      this.currentPosition += squares;
-    } else {
-      this.currentPosition -= squares;
+      this.currentDirection = 0; // Facing right
+    } else if (this.currentDirection === 0) {
+      this.currentDirection = -1; // Facing down
+    } else if (this.currentDirection === -1) {
+      this.currentDirection = 1; // Facing up
     }
   }
-  turn() {
+
+  public turnRight() {
     if (this.currentDirection === 1) {
+      this.currentDirection = 0;
+    } else if (this.currentDirection === 0) {
       this.currentDirection = -1;
-    } else {
+    } else if (this.currentDirection === -1) {
       this.currentDirection = 1;
     }
   }
-  public get position() {
-    return this.currentPosition;
+  public move(steps: number) {
+    if (this.currentDirection === 1) {
+      this.currentPosition = new Point(
+        this.position.x,
+        this.position.y + steps,
+      );
+    } else if (this.currentDirection === 0) {
+      this.currentPosition = new Point(
+        this.position.x + steps,
+        this.position.y,
+      );
+    } else if (this.currentDirection === -1) {
+      this.currentPosition = new Point(
+        this.position.x,
+        this.position.y - steps,
+      );
+    } else {
+      this.currentPosition = new Point(
+        this.position.x - steps,
+        this.position.y,
+      );
+    }
+  }
+
+  public get position(): Point {
+    return this.position;
   }
 }
-
 export default Snake;
