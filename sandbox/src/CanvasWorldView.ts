@@ -14,15 +14,19 @@ class CanvasWorldView implements IWorldView {
   public display(worldModel: WorldModel) {
     this.worldCanvas.width = worldModel.width * this.scalingFactor;
     this.worldCanvas.height = worldModel.height * this.scalingFactor;
-    this.context.fillStyle = "green";
-    const snakePosition = worldModel.Snake.position;
-    const snakeSize = 1;
-    this.context.fillRect(
-      snakePosition.x * this.scalingFactor,
-      snakePosition.y * this.scalingFactor,
-      snakeSize * this.scalingFactor,
-      snakeSize * this.scalingFactor,
-    );
+    for (const snake of worldModel.allSnakes) {
+      for (const part of snake.currentParts) {
+        this.context.fillStyle = "green";
+        const snakePosition = worldModel.Snake.position;
+        const snakeSize = 1;
+        this.context.fillRect(
+          snakePosition.x * this.scalingFactor,
+          snakePosition.y * this.scalingFactor,
+          snakeSize * this.scalingFactor,
+          snakeSize * this.scalingFactor,
+        );
+      }
+    }
   }
 }
 export default CanvasWorldView;
