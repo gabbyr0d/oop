@@ -3,10 +3,16 @@ import Point from "./Point";
 class Snake {
   private currentPosition: Point;
   private currentDirection: number;
-
-  constructor() {
+  private startPosition: Point;
+  private size: number;
+  private currentParts: Point[];
+  constructor(startPosition: Point, size: number, direction: number) {
+    this.startPosition = startPosition;
+    this.size = size;
     this.currentPosition = new Point(0, 0);
     this.currentDirection = 1;
+    this.currentParts = [];
+    this.currentParts.push(startPosition);
   }
   /**
    * @deprecated Use {turn}
@@ -16,11 +22,11 @@ class Snake {
   }
   public turnLeft() {
     if (this.currentDirection === 1) {
-      this.currentDirection = 0; // Facing right
+      this.currentDirection = 0;
     } else if (this.currentDirection === 0) {
-      this.currentDirection = -1; // Facing down
+      this.currentDirection = -1;
     } else if (this.currentDirection === -1) {
-      this.currentDirection = 1; // Facing up
+      this.currentDirection = 1;
     }
   }
 
@@ -33,30 +39,34 @@ class Snake {
       this.currentDirection = 1;
     }
   }
-  public move(steps: number) {
+  move(numberOfSquares: number) {
     if (this.currentDirection === 1) {
       this.currentPosition = new Point(
-        this.position.x,
-        this.position.y + steps,
+        this.currentPosition.x + numberOfSquares,
+        this.currentPosition.y,
       );
-    } else if (this.currentDirection === 0) {
+    } else if (this.currentDirection === 2) {
       this.currentPosition = new Point(
-        this.position.x + steps,
-        this.position.y,
+        this.currentPosition.x,
+        this.currentPosition.y + numberOfSquares,
       );
     } else if (this.currentDirection === -1) {
       this.currentPosition = new Point(
-        this.position.x,
-        this.position.y - steps,
+        this.currentPosition.x - numberOfSquares,
+        this.currentPosition.y,
       );
     } else {
       this.currentPosition = new Point(
-        this.position.x - steps,
-        this.position.y,
+        this.currentPosition.x,
+        this.currentPosition.y - numberOfSquares,
       );
     }
   }
-
+  public didCollide(s: Snake): boolean {
+    return this.currentParts.some(
+      (part, index) => index !== 0 && s.currentParts.includes(part),
+    );
+  }
   public get position(): Point {
     return this.position;
   }
