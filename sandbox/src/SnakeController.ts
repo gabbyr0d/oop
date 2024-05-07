@@ -23,7 +23,7 @@ class SnakeController {
     return this.slitherer.position;
   }
 
-  public get snakeDirection(): string {
+  public get snakeDirection() {
     return this.slitherer.direction;
   }
 
@@ -33,6 +33,9 @@ class SnakeController {
 
   public get worldHeight(): number {
     return this.snakeWorld.height;
+  }
+  public get isSnakeActive() {
+    return this.slitherer.isActive;
   }
 }
 
