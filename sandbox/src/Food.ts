@@ -1,8 +1,8 @@
 import display from "./display";
 import Snake from "./Snake";
 import Point from "./Point";
-import Actor from "./IActor";
-class Food implements Actor {
+import IActor from "./IActor";
+class Food implements IActor {
   private currentPosition: Point;
   private isCurrentlyActive: boolean;
   constructor(x: number, y: number) {
@@ -24,3 +24,4 @@ class Food implements Actor {
   }
 }
 export default Food;
+
