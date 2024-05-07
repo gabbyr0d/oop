@@ -19,7 +19,6 @@ class AvoidWallsPlayer extends Player {
       snakeDirection === 1 &&
       snakePosition.x === this.sc.worldWidth - 1
     ) {
-      // Avoid right wall going down
       this.sc.turnSnakeLeft();
     }
   }
