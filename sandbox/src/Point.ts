@@ -1,7 +1,7 @@
 import display from "./display";
 class Point {
-  private readonly xcoord: number;
-  private readonly ycoord: number;
+  private xcoord: number;
+  private ycoord: number;
 
   constructor(x: number, y: number) {
     this.xcoord = x;
