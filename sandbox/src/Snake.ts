@@ -9,6 +9,7 @@ class Snake implements Collidable {
   private size: number;
   private currentParts: Point[];
   private isCurrentlyActive: boolean;
+
   constructor(startPosition: Point, size: number, direction: number) {
     this.startPosition = startPosition;
     this.size = size;
@@ -66,9 +67,9 @@ class Snake implements Collidable {
       );
     }
   }
-  public didCollide(a: Actor): boolean {
+  public didCollide(): boolean {
     if (this.type !== "snake") {
-      return this.position.equals(a.position());
+      return true;
     } else {
       return this.currentParts
         .slice(1)
@@ -92,15 +93,21 @@ class Snake implements Collidable {
       this.currentParts.push(new Point(this.position.x - 1, this.position.y));
     }
   }
+
   public get position(): Point {
     return this.currentParts[0];
+  }
+  public get direction() {
+    return this.currentDirection;
   }
   public get isActive() {
     return this.isCurrentlyActive;
   }
-
   public get type() {
     return "snake";
+  }
+  public get CurrentParts(): Point[] {
+    return this.currentParts;
   }
 }
 export default Snake;
