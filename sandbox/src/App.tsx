@@ -5,6 +5,7 @@ import display from "./display";
 //import Car from "./Car";
 //import Duck from "./Duck";
 import Snake from "./Snake";
+import Point from "./Point";
 export default function App() {
   useEffect(() => {
     // Include your display statements to test below
@@ -48,8 +49,8 @@ export default function App() {
     //display("Yellow duck quacked a total of:",yellowDuck.totalQuacks,"quacks",);
     //display("Brown duck quacked a total of:", brownDuck.totalQuacks, "quacks");
 
-    const greenSnake = new Snake();
-    const yellowSnake = new Snake();
+    const greenSnake = new Snake(new Point(10, 10), 0, 0);
+    const yellowSnake = new Snake(new Point(20, 20), 0, 0);
     greenSnake.turn();
     greenSnake.move(3);
     greenSnake.move(1);
