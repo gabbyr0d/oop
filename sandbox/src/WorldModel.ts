@@ -2,7 +2,9 @@ import display from "./display";
 import Point from "./Point";
 import Snake from "./Snake";
 import IWorldView from "./IWorldView";
+import Actor from "./Actor";
 class WorldModel {
+  private actors: Actor[];
   private worldWidth: number;
   private worldHeight: number;
   private allSnakes: Snake[];
@@ -12,17 +14,18 @@ class WorldModel {
     this.worldHeight = height;
     this.allSnakes = [];
     this.allViews = [];
+    this.actors = [];
+  }
+  public addActor(actor: Actor): void {
+    this.actors.push(actor);
   }
 
   public update(steps: number): void {
     for (const snake of this.allSnakes) {
       snake.move(steps);
     }
-
-    for (const view of this.allViews) {
-      view.display(this);
-    }
   }
+
   public addSnake(snake: Snake): void {
     this.allSnakes.push(snake);
   }
@@ -30,6 +33,10 @@ class WorldModel {
   public addView(view: IWorldView): void {
     this.allViews.push(view);
   }
+  public reset() {
+    for (let i = 0; i < this.allViews.length; i++) {}
+  }
+
   public get width(): number {
     return this.worldWidth;
   }
@@ -44,4 +51,5 @@ class WorldModel {
     this.allViews.push(view);
   }
 }
+
 export default WorldModel;
