@@ -8,6 +8,8 @@ abstract class Player {
     this.sc = controller;
   }
   abstract makeTurn(): void;
+  public isActive() {
+    return this.sc.isSnakeActive;
+  }
 }
-
 export default Player;
