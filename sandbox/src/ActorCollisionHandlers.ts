@@ -17,7 +17,7 @@ class ActorCollisionHandlers {
   public addCollisionAction(
     colliderType: string,
     collidedType: string,
-    actionApplicator: CollisionHandler,
+    actionApplicator: string,
   ) {
     let key = this.toKey(colliderType, collidedType);
     this.pairs.set(key, actionApplicator);
